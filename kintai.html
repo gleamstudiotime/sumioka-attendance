@@ -2132,30 +2132,14 @@ p:last-child { margin-bottom: 0; }
             <select class="sumioka-input" id="select-break">
               <option value="">-- 選択してください --</option>
               <option value="0">0分</option>
-              <option value="5">5分</option>
-              <option value="10">10分</option>
               <option value="15">15分</option>
-              <option value="20">20分</option>
-              <option value="25">25分</option>
               <option value="30">30分</option>
-              <option value="35">35分</option>
-              <option value="40">40分</option>
               <option value="45">45分</option>
-              <option value="50">50分</option>
-              <option value="55">55分</option>
-              <option value="60">1時間</option>
-              <option value="65">1時間5分</option>
-              <option value="70">1時間10分</option>
-              <option value="75">1時間15分</option>
-              <option value="80">1時間20分</option>
-              <option value="85">1時間25分</option>
-              <option value="90">1時間30分</option>
-              <option value="95">1時間35分</option>
-              <option value="100">1時間40分</option>
-              <option value="105">1時間45分</option>
-              <option value="110">1時間50分</option>
-              <option value="115">1時間55分</option>
-              <option value="120">2時間</option>
+              <option value="60">60分</option>
+              <option value="75">75分</option>
+              <option value="90">90分</option>
+              <option value="105">105分</option>
+              <option value="120">120分</option>
             </select>
           </div>
 
@@ -3268,6 +3252,76 @@ p:last-child { margin-bottom: 0; }
               <span class="access-badge access-badge-admin">[管]</span>
               <span>管理者のみ操作できる</span>
             </div>
+          </div>
+        </div>
+
+      </div>
+
+        <!-- タスクスケジューラ自動起動 -->
+        <div style="border:1px solid GrayText;border-radius:10px;padding:1.1rem 1.25rem;
+          margin-top:1rem;background:Canvas">
+          <p style="font-weight:700;font-size:0.92rem;margin-bottom:0.75rem">
+            ⏰ 退勤5分前にKintaiを自動で開く設定（Windows）
+          </p>
+          <p style="font-size:0.82rem;color:GrayText;margin-bottom:1rem;line-height:1.7">
+            Windowsのタスクスケジューラを使うと、退勤時間の5分前に自動でKintaiを開けます。<br>
+            スタッフごとに退勤時間が異なる場合は、それぞれ別のBATファイルを作って登録してください。
+          </p>
+
+          <!-- STEP1 -->
+          <div style="margin-bottom:1.25rem">
+            <p style="font-size:0.85rem;font-weight:700;color:#1d4ed8;margin-bottom:0.5rem">
+              STEP 1：BATファイルを作る
+            </p>
+            <div style="font-size:0.82rem;line-height:1.8;margin-bottom:0.5rem">
+              メモ帳を開いて以下をコピー＆ペーストし、退勤時間に合わせて時刻を書き換えてください。<br>
+              ファイル名は <code style="background:#f3f4f6;padding:0.1em 0.4em;border-radius:3px">open_kintai_1500.bat</code> のように退勤時間を含めると管理しやすいです。
+            </div>
+            <pre style="background:#1e293b;color:#e2e8f0;border-radius:8px;padding:1rem;
+              font-size:0.82rem;line-height:1.8;overflow-x:auto;margin:0">
+@echo off
+start msedge "https://gleamstudiotime.github.io/sumioka-attendance/kintai.html"</pre>
+            <div style="margin-top:0.5rem;font-size:0.78rem;color:GrayText;line-height:1.7">
+              💡 保存するときは「ファイルの種類」を <strong>すべてのファイル</strong> にして、<br>
+              　　ファイル名の末尾を <strong>.bat</strong> にして保存してください。<br>
+              💡 保存場所はどこでもOKです（例：デスクトップ・Cドライブ直下など）。
+            </div>
+          </div>
+
+          <!-- STEP2 -->
+          <div style="margin-bottom:1.25rem">
+            <p style="font-size:0.85rem;font-weight:700;color:#1d4ed8;margin-bottom:0.5rem">
+              STEP 2：タスクスケジューラに登録する
+            </p>
+            <ol style="font-size:0.82rem;line-height:2;padding-left:1.25rem;margin:0">
+              <li>スタートメニューで「タスクスケジューラ」と検索して開く</li>
+              <li>右側の「<strong>基本タスクの作成</strong>」をクリック</li>
+              <li>名前を入力（例：<code style="background:#f3f4f6;padding:0.1em 0.4em;border-radius:3px">Kintai自動起動 15:00</code>）→「次へ」</li>
+              <li>トリガー：「<strong>毎日</strong>」を選択 →「次へ」</li>
+              <li>開始時刻を退勤5分前に設定（例：退勤15:00なら <strong>14:55</strong>）→「次へ」</li>
+              <li>操作：「<strong>プログラムの開始</strong>」を選択 →「次へ」</li>
+              <li>「参照」で STEP1 で作ったBATファイルを選択 →「次へ」</li>
+              <li>「<strong>完了</strong>」をクリック</li>
+            </ol>
+          </div>
+
+          <!-- STEP3 -->
+          <div style="margin-bottom:1rem">
+            <p style="font-size:0.85rem;font-weight:700;color:#1d4ed8;margin-bottom:0.5rem">
+              STEP 3：動作確認
+            </p>
+            <div style="font-size:0.82rem;line-height:1.8">
+              タスクスケジューラの一覧で作ったタスクを右クリック →「<strong>実行</strong>」でKintaiが開けば成功です。
+            </div>
+          </div>
+
+          <!-- 注意事項 -->
+          <div style="padding:0.65rem 0.85rem;background:#fffbeb;border:1px solid #fbbf24;
+            border-radius:6px;font-size:0.8rem;color:#78350f;line-height:1.7">
+            ⚠️ <strong>注意事項</strong><br>
+            ・PCがスリープ・シャットダウン中は起動しません。PCを起動した状態にしておいてください。<br>
+            ・土日・祝日も実行されます。不要な日はタスクスケジューラで「無効」にしてください。<br>
+            ・スタッフごとに退勤時間が異なる場合は、BATファイルとタスクをそれぞれ作ってください。
           </div>
         </div>
 
